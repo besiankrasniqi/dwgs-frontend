@@ -78,7 +78,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebPackPlugin({
-      template: path.resolve('src') + '/index_base.html',
+      template: path.resolve('src') + '/index.html',
       filename: 'index.html',
     }),
     new webpack.LoaderOptionsPlugin({
