@@ -1,4 +1,4 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
+import {library} from '@fortawesome/fontawesome-svg-core'
 import {
   faUpload,
   faSquare,
@@ -35,7 +35,7 @@ import {
   faChartLine,
   faMap,
   faUsersCog,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faUpload,
@@ -72,5 +72,5 @@ library.add(
   faPencilRuler,
   faChartLine,
   faMap,
-  faUsersCog
-);
+  faUsersCog,
+)
