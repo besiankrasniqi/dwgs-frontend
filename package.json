@@ -82,6 +82,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.9.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/react": "^16.9.34",
+    "@types/react-router-dom": "^5.1.6",
     "axios": "^0.18.1",
     "html-loader": "^0.5.5",
     "image-webpack-loader": "^7.0.1",

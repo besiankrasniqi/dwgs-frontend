@@ -47,6 +47,26 @@ const Login = withRouter(({ history }) => {
         console.log('getAuth:', AuthUtils.getAuth())
     }
 
+    const getData = () => {
+        axios.get(`${BASE_URL}/auth/is-authenticated`, {
+            params: {
+              jwt: AuthUtils.getAuth().jwt
+            // jwt: 'some test token'
+            }
+          })
+            .then(function (response) {
+                // handle success
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }
+
     return (
         <>
             <div className="container mt-5">
@@ -73,14 +93,14 @@ const Login = withRouter(({ history }) => {
                                 onClick={login}
                             >Login</div>
 
-                            {/* <br/>
+                            <br/>
                             <br/>
                             <br/>
                             <br/>
 
                             <div className="btn btn-primary"
-                                onClick={test}
-                            >Test</div> */}
+                                onClick={getData}
+                            >Get Data test</div>
                         </div>
 
 

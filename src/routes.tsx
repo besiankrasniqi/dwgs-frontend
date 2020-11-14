@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import Context from '../context'
 import Login from './components/login/login.component'
 import Dashboard from './components/dashboard/dashboard.component'
+import Register from './components/register/register.component'
 
 const Routes = props => {
     const [ isAuthorized, setIsAuthorized ] = React.useState<boolean>(false)
@@ -39,6 +40,13 @@ const Routes = props => {
                 path="/login"not
                 state="login"
                 component={ Login }
+            />
+
+            <Route
+                exact
+                path="/register"not
+                state="register"
+                component={ Register }
             />
 
             <Route
