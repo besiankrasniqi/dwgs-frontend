@@ -8,7 +8,7 @@ body
 .auth-ui
     width: 28%
     min-height: 450px
-    margin: 4rem auto 0 auto
+    margin: 4rem auto 3rem auto
     border-radius: 1rem
     box-shadow: 0px 0px 10px #d0d0d0
     background-color: #d8e6f5 !important
@@ -28,3 +28,28 @@ span.auth-footer-link
     font-weight: bold
     display: blocks
     cursor: pointer
+
+/* smartphones, portrait iPhone, portrait 480x320 phones(Android) */
+@media (min-width: 320px)
+    .auth-ui
+        width: 95%
+
+/* portrait tablets, portrait iPad, e-readers (Nokia/Kindle), landscape 800x480 hones (Android) */
+@media (min-width: 600px)
+    .auth-ui
+        width: 55%
+
+/* tablet, landscape iPad, lo-res laptios and desktops */
+@media (min-width: 801px)
+    .auth-ui
+        width: 50%
+
+/* desktops */
+@media (min-width: 1025px)
+    .auth-ui
+        width: 40%
+
+/* large desktops */
+@media (min-width: 1281px)
+    .auth-ui
+        width: 28%
