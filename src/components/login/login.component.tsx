@@ -4,10 +4,12 @@ import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './sass/login.style.sass'
+import useCommonUtils from '../../hooks/useCommonUtils'
 
 const Login = props => {
   const BASE_URL = 'http://localhost:5001'
   const history = useHistory()
+  const CommonUtils = useCommonUtils()
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [validationMessage, setValidationMessage] = React.useState<
@@ -61,6 +63,10 @@ const Login = props => {
           'Email or password is incorrect, please try again!',
         )
       })
+  }
+
+  const goToRoute = path => {
+    history.push(path)
   }
 
   return (
@@ -136,6 +142,17 @@ const Login = props => {
               </div>
             </div>
           </form>
+
+          <div className="row mt-2">
+            <div className="col-md-12 text-center">
+              <span
+                className="auth-footer-link"
+                onClick={() => CommonUtils.goToRoute('/register')}
+              >
+                Create an account
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </>

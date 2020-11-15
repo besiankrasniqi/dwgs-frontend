@@ -5,10 +5,12 @@ import useHttp from '../../hooks/useHttp'
 import ModalInfo from '../ModalInfo'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './sass/register.style.sass'
+import useCommonUtils from '../../hooks/useCommonUtils'
 
 const Register = props => {
   const BASE_URL = 'http://localhost:5001'
   const history = useHistory()
+  const CommonUtils = useCommonUtils()
   const [name, setName] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
@@ -207,6 +209,17 @@ const Register = props => {
                     className="btn btn-primary btn-lg w-100"
                   />
                 </div>
+              </div>
+            </div>
+
+            <div className="row mt-2">
+              <div className="col-md-12 text-center">
+                <span
+                  className="auth-footer-link"
+                  onClick={() => CommonUtils.goToRoute('/login')}
+                >
+                  User Login
+                </span>
               </div>
             </div>
           </form>
