@@ -5,6 +5,7 @@ import {Route} from 'react-router-dom'
 import Login from './components/login/login.component'
 import Dashboard from './components/dashboard/dashboard.component'
 import Register from './components/register/register.component'
+import CreateDrawing from './components/create-drawing/create-drawing.component'
 
 const Routes = (props): React.ReactElement => {
   const [isAuthorized, setIsAuthorized] = React.useState<boolean>(false)
@@ -42,6 +43,13 @@ const Routes = (props): React.ReactElement => {
         path="/dashboard"
         state="dashboard"
         component={isAuthorized ? Dashboard : Login}
+      />
+
+      <Route
+        exact
+        path="/create-drawing"
+        state="create-drawing"
+        component={isAuthorized ? CreateDrawing : Login}
       />
     </>
   )

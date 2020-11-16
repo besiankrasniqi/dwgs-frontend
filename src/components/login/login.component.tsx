@@ -49,7 +49,7 @@ const Login = props => {
             payload.userId,
           )
           setValidationMessage(null)
-          history.push('/dashboard')
+          history.push('/create-drawing')
         } else {
           console.log('response status is:', response.data.payload.status)
           AuthUtils.setAuth(null)
