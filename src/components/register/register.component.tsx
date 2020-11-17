@@ -92,16 +92,16 @@ const Register = props => {
     } catch (error) {
       setIsBackendError(true)
       registerModalCopy.title = 'Error!'
-      registerModalCopy.bodyInfo = error.response.data.message
+      registerModalCopy.bodyInfo = error.message
       registerModalCopy.bodyInfoClass = 'alert alert-danger'
-      console.log('register error is: %O', error.response.data.message)
+      console.log('register error is: %O', error.message)
     }
 
     registerModalCopy.show = true
     setRegisterModal(registerModalCopy)
   }
 
-  const onHideRgisterModal = () => {
+  const onHideRegisterModal = () => {
     return
   }
 
@@ -228,7 +228,7 @@ const Register = props => {
 
       <ModalInfo
         show={registerModal.show}
-        onHide={onHideRgisterModal}
+        onHide={onHideRegisterModal}
         title={registerModal.title}
         hideHandler={modalHideHandler}
         body={registerModal.body}

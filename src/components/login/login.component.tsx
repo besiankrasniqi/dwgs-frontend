@@ -47,6 +47,7 @@ const Login = props => {
             payload.jwt,
             payload.userEmail,
             payload.userId,
+            payload.userName,
           )
           setValidationMessage(null)
           history.push('/create-drawing')

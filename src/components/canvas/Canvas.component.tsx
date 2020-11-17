@@ -1,15 +1,18 @@
 import * as React from 'react'
+import '../canvas/sass/Canvas.style.sass'
 
 interface Props {
   brushColor: string
   brushStrokeSize: number
   brushType: string
+  canvasInfoCallback: Function
 }
 
 const Canvas = ({
   brushColor,
   brushStrokeSize,
   brushType,
+  canvasInfoCallback,
 }: Props): React.ReactElement => {
   let sketch = false
   const BUTTON = 0b01
@@ -20,7 +23,10 @@ const Canvas = ({
 
   React.useEffect(() => {
     canvas = canvasRef.current
-    if (canvas) contextCanvas = canvas.getContext('2d')
+    if (canvas) {
+      contextCanvas = canvas.getContext('2d')
+      canvasInfoCallback(canvas)
+    }
   }, [canvas, contextCanvas, brushColor, brushStrokeSize, brushType])
 
   const brushContinue = newDot => {
@@ -109,8 +115,8 @@ const Canvas = ({
             id="canvas"
             className="canvas-drawing"
             ref={canvasRef}
-            height="450"
             width="800"
+            height="300"
             onTouchStart={touchStart}
             onTouchEnd={touchEnd}
             onTouchCancel={touchEnd}

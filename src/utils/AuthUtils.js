@@ -2,8 +2,8 @@ const AuthUtils = {
   getAuth() {
     return JSON.parse(localStorage.getItem('auth'))
   },
-  setAuth(isAuthorized, jwtToken, email, id) {
-    if (!isAuthorized || !jwtToken || !email || !id) {
+  setAuth(isAuthorized, jwtToken, email, id, name) {
+    if (!isAuthorized || !jwtToken || !email || !id || !name) {
       localStorage.setItem('auth', null)
     }
 
@@ -13,6 +13,7 @@ const AuthUtils = {
         isAuthorized: isAuthorized,
         jwt: jwtToken,
         userEmail: email,
+        userName: name,
         userId: id,
       }),
     )
