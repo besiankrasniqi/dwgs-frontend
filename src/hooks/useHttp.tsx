@@ -42,10 +42,12 @@ const useHttp = (lib: string): Function => {
 
       reqInstance.interceptors.response.use(
         function(successResponse) {
+          //TODO: add context to the entire app and dispatch errors globally
           return successResponse
         },
 
         function(errorResponse) {
+          //TODO: add context to the entire app and dispatch errors globally
           console.log('Response error:', errorResponse)
           return Promise.reject(errorResponse)
         },
