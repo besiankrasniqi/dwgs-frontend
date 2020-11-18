@@ -5,21 +5,22 @@ import useHttp from '../../hooks/useHttp'
 import {useHistory} from 'react-router-dom'
 import Thumbnail from '../thumbnail/thumbnail.component'
 import './sass/drawing-list.style.sass'
+import RoutesConfig from '../../config/routes-config'
+import Config from '../../config/config'
 
-const DrawingList = props => {
-  const BASE_URL = 'http://localhost:5001'
+const DrawingList = (props): React.ReactElement => {
   const history = useHistory()
   const httpRequest = useHttp('axios')
   const [drawingList, setDrawingList] = React.useState([])
 
   const goToCreateDrawing = () => {
-    history.push('/create-drawing')
+    history.push(RoutesConfig.createDrawing.route)
   }
 
   React.useEffect(() => {
     httpRequest({
       method: 'get',
-      url: `${BASE_URL}/images/list`,
+      url: `${Config.settings.endpoint}/images/list`,
       params: {},
     }).then(response => {
       console.log('DrawingList response is:', response)

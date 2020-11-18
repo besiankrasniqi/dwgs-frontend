@@ -5,9 +5,10 @@ import {useHistory} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './sass/login.style.sass'
 import useCommonUtils from '../../hooks/useCommonUtils'
+import RoutesConfig from '../../config/routes-config'
+import Config from '../../config/config'
 
 const Login = props => {
-  const BASE_URL = 'http://localhost:5001'
   const history = useHistory()
   const CommonUtils = useCommonUtils()
   const [email, setEmail] = React.useState<string>('')
@@ -30,7 +31,7 @@ const Login = props => {
     e.preventDefault()
 
     axios
-      .post(`${BASE_URL}/auth/login`, {
+      .post(`${Config.settings.endpoint}/auth/login`, {
         email,
         password,
       })
@@ -50,7 +51,7 @@ const Login = props => {
             payload.userName,
           )
           setValidationMessage(null)
-          history.push('/drawing-list')
+          history.push(RoutesConfig.drawingList.route)
         } else {
           console.log('response status is:', response.data.payload.status)
           AuthenticationUtils.setAuth(null)
@@ -64,10 +65,6 @@ const Login = props => {
           'Email or password is incorrect, please try again!',
         )
       })
-  }
-
-  const goToRoute = path => {
-    history.push(path)
   }
 
   return (
@@ -148,7 +145,9 @@ const Login = props => {
             <div className="col-md-12 text-center">
               <span
                 className="auth-footer-link"
-                onClick={() => CommonUtils.goToRoute('/register')}
+                onClick={() =>
+                  CommonUtils.goToRoute(RoutesConfig.register.route)
+                }
               >
                 Create an account
               </span>

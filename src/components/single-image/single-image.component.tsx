@@ -5,9 +5,10 @@ import {useHistory} from 'react-router-dom'
 import useHttp from '../../hooks/useHttp'
 import AuthenticationUtils from '../../utils/AuthenticationUtils'
 import ModalInfo from '../ModalInfo'
+import RoutesConfig from '../../config/routes-config'
+import Config from '../../config/config'
 
 const SingleImage = ({match}): React.ReactElement => {
-  const BASE_URL = 'http://localhost:5001'
   const [isPubliclyAccessed, setIsPubliclyAccessed] = React.useState(false)
   const history = useHistory()
   const httpRequest = useHttp('axios')
@@ -37,7 +38,7 @@ const SingleImage = ({match}): React.ReactElement => {
   }
 
   const goToAllDrawings = () => {
-    history.push('/drawing-list')
+    history.push(RoutesConfig.drawingList.route)
   }
 
   const deleteDrawing = () => {
@@ -46,7 +47,7 @@ const SingleImage = ({match}): React.ReactElement => {
     try {
       httpRequest({
         method: 'delete',
-        url: `${BASE_URL}/images/delete-image`,
+        url: `${Config.settings.endpoint}/images/delete-image`,
         params: {
           id: drawingId,
         },
@@ -107,7 +108,7 @@ const SingleImage = ({match}): React.ReactElement => {
       return prevStateCopy
     })
 
-    if (!isBackendError) history.push('/drawing-list')
+    if (!isBackendError) history.push(RoutesConfig.drawingList.route)
   }
 
   React.useEffect(() => {
@@ -122,9 +123,9 @@ const SingleImage = ({match}): React.ReactElement => {
 
     httpRequest({
       method: 'get',
-      url: !isPubliclyAccessed
-        ? `${BASE_URL}/images/get-image`
-        : `${BASE_URL}/images/get-public-image`,
+      url: `${Config.settings.endpoint}/images/${
+        !isPubliclyAccessed ? 'get-image' : 'get-public-image'
+      }`,
       params: {
         id: imageId,
       },

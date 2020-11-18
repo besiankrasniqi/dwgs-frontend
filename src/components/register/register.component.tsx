@@ -6,9 +6,10 @@ import ModalInfo from '../ModalInfo'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import './sass/register.style.sass'
 import useCommonUtils from '../../hooks/useCommonUtils'
+import RoutesConfig from '../../config/routes-config'
+import Config from '../../config/config'
 
 const Register = props => {
-  const BASE_URL = 'http://localhost:5001'
   const history = useHistory()
   const CommonUtils = useCommonUtils()
   const [name, setName] = React.useState<string>('')
@@ -57,7 +58,7 @@ const Register = props => {
     try {
       const registerUser = await httpRequest({
         method: 'post',
-        url: `${BASE_URL}/auth/register`,
+        url: `${Config.settings.endpoint}/auth/register`,
         data: {
           name,
           email,
@@ -113,7 +114,7 @@ const Register = props => {
       return prevStateCopy
     })
 
-    if (!isBackendError) history.push('/login')
+    if (!isBackendError) history.push(RoutesConfig.login.route)
   }
 
   return (

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import AuthenticationUtils from './utils/AuthenticationUtils'
 import {Route} from 'react-router-dom'
-// import Context from '../context'
+import RoutesConfig from './config/routes-config'
 import Login from './components/login/login.component'
 import Register from './components/register/register.component'
 import CreateDrawing from './components/create-drawing/create-drawing.component'
@@ -33,36 +33,39 @@ const Routes = (props): React.ReactElement => {
     <>
       <Route
         exact
-        path="/"
-        state="home"
+        path={RoutesConfig.home.route}
+        state={RoutesConfig.home.state}
         component={isAuthorized ? DrawingList : Login}
       />
 
-      <Route exact path="/login" not state="login" component={Login} />
-
-      <Route exact path="/register" not state="register" component={Register} />
+      <Route
+        exact
+        path={RoutesConfig.login.route}
+        state={RoutesConfig.login.state}
+        component={Login}
+      />
+      <Route
+        exact
+        path={RoutesConfig.register.route}
+        state={RoutesConfig.login.state}
+        component={Register}
+      />
 
       <Route
         exact
-        path="/create-drawing"
-        state="create-drawing"
+        path={RoutesConfig.createDrawing.route}
+        state={RoutesConfig.createDrawing.state}
         component={isAuthorized ? CreateDrawing : Login}
       />
 
       <Route
         exact
-        path="/drawing-list"
-        state="drawing-list"
+        path={RoutesConfig.drawingList.route}
+        state={RoutesConfig.drawingList.state}
         component={isAuthorized ? DrawingList : Login}
       />
 
       <Route exact path="/image/:id" state="image" component={SingleImage} />
-      <Route
-        exact
-        path="/image/:id/:public"
-        state="image"
-        component={SingleImage}
-      />
     </>
   )
 }

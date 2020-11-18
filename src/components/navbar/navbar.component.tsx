@@ -1,16 +1,18 @@
 import * as React from 'react'
-import {withRouter} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {Link} from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
 import AuthenticationUtils from '../../utils/AuthenticationUtils'
+import RoutesConfig from '../../config/routes-config'
+
 import './sass/navbar.style.sass'
 
 const NavBar = withRouter(({history}) => {
   const [userName, setUserName] = React.useState<string>('')
   const signOut = () => {
     AuthenticationUtils.setAuth(null)
-    history.push('/login')
+    history.push(RoutesConfig.login.route)
   }
 
   React.useEffect(() => {
@@ -26,16 +28,26 @@ const NavBar = withRouter(({history}) => {
       <div className="navbar-sidebar">
         <div
           className="navicons"
-          data-tip="Create A Drawing"
+          data-tip={RoutesConfig.createDrawing.title}
           data-place="right"
         >
-          <Link className="navicons-link" to={{pathname: '/create-drawing'}}>
+          <Link
+            className="navicons-link"
+            to={{pathname: RoutesConfig.createDrawing.route}}
+          >
             <FontAwesomeIcon icon={['fas', 'pencil-ruler']} size="sm" />
           </Link>
         </div>
 
-        <div className="navicons" data-tip="Drawings List" data-place="right">
-          <Link className="navicons-link" to={{pathname: '/drawing-list'}}>
+        <div
+          className="navicons"
+          data-tip={RoutesConfig.drawingList.title}
+          data-place="right"
+        >
+          <Link
+            className="navicons-link"
+            to={{pathname: RoutesConfig.drawingList.route}}
+          >
             <FontAwesomeIcon icon={['fas', 'dice-d6']} size="sm" />
           </Link>
         </div>

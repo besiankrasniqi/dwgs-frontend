@@ -8,9 +8,10 @@ import useHttp from '../../hooks/useHttp'
 import ModalInfo from '../ModalInfo'
 import AuthenticationUtils from '../../utils/AuthenticationUtils'
 import useCommonUtils from '../../hooks/useCommonUtils'
+import RoutesConfig from '../../config/routes-config'
+import Config from '../../config/config'
 
 const CreateDrawing = props => {
-  const BASE_URL = 'http://localhost:5001'
   const httpRequest = useHttp('axios')
   const BRUSH_COLOR_RED = '#d44a4a'
   const BRUSH_COLOR_BLUE = '#1866bb'
@@ -84,7 +85,7 @@ const CreateDrawing = props => {
       return prevStateCopy
     })
 
-    if (!isBackendError) history.push('/drawing-list')
+    if (!isBackendError) history.push(RoutesConfig.drawingList.route)
   }
 
   const drawingNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +120,7 @@ const CreateDrawing = props => {
     try {
       const save = await httpRequest({
         method: 'post',
-        url: `${BASE_URL}/images/save`,
+        url: `${Config.settings.endpoint}/images/save`,
         data: {
           drawingName,
           imageData,
