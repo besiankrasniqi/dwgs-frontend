@@ -21,9 +21,16 @@ const useHttp = (lib: string): Function => {
           }
 
           if (allowedUrl) {
-            config.headers['Authorization'] =
-              'Bearer ' + AuthenticationUtils.getAuth().jwt
-            // config.headers['Authorization'] = 'Bearer asdgadsggags'
+            if (AuthenticationUtils.getAuth()) {
+              console.log(
+                'useHttp: AuthenticationUtils.getAuth()',
+                AuthenticationUtils.getAuth(),
+              )
+              if (AuthenticationUtils.getAuth().jwt) {
+                config.headers['Authorization'] =
+                  'Bearer ' + AuthenticationUtils.getAuth().jwt
+              }
+            }
           }
 
           return config
