@@ -74,20 +74,15 @@ const Register = props => {
         data: {message},
       } = registerUser
 
-      console.log('registerUser message:', message)
-      console.log('registerUser isRegistered:', isRegistered)
-
       if (isRegistered) {
         registerModalCopy.title = 'Success!'
         registerModalCopy.bodyInfo = message
         registerModalCopy.bodyInfoClass = 'alert alert-success'
-        console.log('success')
         setIsBackendError(false)
       } else {
         registerModalCopy.title = 'Error!'
         registerModalCopy.bodyInfo = message
         registerModalCopy.bodyInfoClass = 'alert alert-danger'
-        console.log('error')
         setIsBackendError(true)
       }
     } catch (error) {
@@ -95,7 +90,6 @@ const Register = props => {
       registerModalCopy.title = 'Error!'
       registerModalCopy.bodyInfo = error.message
       registerModalCopy.bodyInfoClass = 'alert alert-danger'
-      console.log('register error is: %O', error.message)
     }
 
     registerModalCopy.show = true
@@ -107,7 +101,6 @@ const Register = props => {
   }
 
   const modalHideHandler = () => {
-    console.log('hiding the modal')
     setRegisterModal(prevState => {
       const prevStateCopy = Object.assign({}, prevState)
       prevStateCopy.show = false

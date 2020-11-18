@@ -52,8 +52,6 @@ const SingleImage = ({match}): React.ReactElement => {
           id: drawingId,
         },
       }).then(response => {
-        console.log('SingleImage response is:', response)
-
         const {
           data: {isDeleted},
         } = response
@@ -61,13 +59,6 @@ const SingleImage = ({match}): React.ReactElement => {
         const {
           data: {message},
         } = response
-
-        console.log(
-          'SingleImage message is:',
-          message,
-          ' - isDeleted:',
-          isDeleted,
-        )
 
         if (isDeleted) {
           infoModalCopy.title = isDeleted ? 'Success!' : 'Error!'
@@ -77,14 +68,12 @@ const SingleImage = ({match}): React.ReactElement => {
           }`
 
           infoModalCopy.bodyInfoClass = `alert alert-success`
-          console.log('SingleImage - infoModalCopy before is:', infoModalCopy)
           setIsBackendError(!isDeleted)
           infoModalCopy.show = true
           setInfoModal(infoModalCopy)
         }
       })
     } catch (error) {
-      console.log('SingleImage there is an error:', error.message)
       setIsBackendError(true)
       infoModalCopy.title = 'Error!'
       infoModalCopy.bodyInfo = error.response.data.message
@@ -92,8 +81,6 @@ const SingleImage = ({match}): React.ReactElement => {
       infoModalCopy.show = true
       setInfoModal(infoModalCopy)
     }
-
-    console.log('SingleImage - infoModalCopy after is:', infoModalCopy)
   }
 
   const onHideinfoModal = () => {
@@ -101,7 +88,6 @@ const SingleImage = ({match}): React.ReactElement => {
   }
 
   const modalHideHandler = () => {
-    console.log('hiding the modal')
     setInfoModal(prevState => {
       const prevStateCopy = Object.assign({}, prevState)
       prevStateCopy.show = false
@@ -114,8 +100,6 @@ const SingleImage = ({match}): React.ReactElement => {
   React.useEffect(() => {
     const urlParams = match.params
     const imageId = urlParams.id
-    console.log('urlParams:', urlParams)
-
     canvas = canvasRef.current
     if (canvas) {
       contextCanvas = canvas.getContext('2d')
@@ -130,8 +114,6 @@ const SingleImage = ({match}): React.ReactElement => {
         id: imageId,
       },
     }).then(response => {
-      console.log('SingleImage response is:', response)
-
       const {
         data: {imageBase64: base64Data},
       } = response
@@ -147,13 +129,6 @@ const SingleImage = ({match}): React.ReactElement => {
       const {
         data: {id: id},
       } = response
-
-      console.log(
-        'SingleImage -userId is:',
-        userId,
-        ' - local storage userid is:',
-        AuthenticationUtils.getAuth().userId,
-      )
 
       setShowDeleteButton(userId === AuthenticationUtils.getAuth().userId)
 
@@ -180,8 +155,6 @@ const SingleImage = ({match}): React.ReactElement => {
         setIsPubliclyAccessed(false)
       } else {
         const urlParams = match.params
-
-        console.log('Single Image url params are:', urlParams)
       }
     }
   }, [])

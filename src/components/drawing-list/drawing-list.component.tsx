@@ -23,13 +23,9 @@ const DrawingList = (props): React.ReactElement => {
       url: `${Config.settings.endpoint}/images/list`,
       params: {},
     }).then(response => {
-      console.log('DrawingList response is:', response)
-
       const {
         data: {results: imageList},
       } = response
-
-      console.log('DrawingList imageList:', imageList)
 
       setDrawingList(imageList)
     })

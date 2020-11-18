@@ -22,10 +22,6 @@ const useHttp = (lib: string): Function => {
 
           if (allowedUrl) {
             if (AuthenticationUtils.getAuth()) {
-              console.log(
-                'useHttp: AuthenticationUtils.getAuth()',
-                AuthenticationUtils.getAuth(),
-              )
               if (AuthenticationUtils.getAuth().jwt) {
                 config.headers['Authorization'] =
                   'Bearer ' + AuthenticationUtils.getAuth().jwt
@@ -48,7 +44,6 @@ const useHttp = (lib: string): Function => {
 
         function(errorResponse) {
           //TODO: add context to the entire app and dispatch errors globally
-          console.log('Response error:', errorResponse)
           return Promise.reject(errorResponse)
         },
       )

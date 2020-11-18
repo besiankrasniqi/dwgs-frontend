@@ -37,13 +37,6 @@ const Thumbnail = ({
     canvas = canvasRef.current
     if (canvas) {
       contextCanvas = canvas.getContext('2d')
-      console.log(
-        'Thumbnail canvas is:',
-        canvas,
-        ' - contextCanvas is:',
-        contextCanvas,
-      )
-
       loadImageDataUrl(base64Data)
     }
   }, [canvas, contextCanvas])

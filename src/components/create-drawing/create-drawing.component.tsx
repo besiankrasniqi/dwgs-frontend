@@ -78,7 +78,6 @@ const CreateDrawing = props => {
   }
 
   const modalHideHandler = () => {
-    console.log('hiding the modal')
     setSaveModal(prevState => {
       const prevStateCopy = Object.assign({}, prevState)
       prevStateCopy.show = false
@@ -95,26 +94,13 @@ const CreateDrawing = props => {
 
   const saveDrawing = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('saveDrawing was invoked')
     const drawingEndTime = new Date().getTime()
     const timeDifferenceInSeconds = CommonUtils.calculateTimeDifferenceInSeconds(
       drawingStartTime,
       drawingEndTime,
     )
 
-    console.log(
-      'saveDrawing - startTime:',
-      drawingStartTime,
-      ' - endTime:',
-      drawingEndTime,
-    )
-    console.log(
-      'saveDrawing - timeDifferenceInSeconds is:',
-      timeDifferenceInSeconds,
-    )
     const imageData = canvasInfo.toDataURL('image/png', 1.0)
-    console.log('imageData:', imageData)
-
     const saveModalCopy = Object.assign({}, saveModal)
 
     try {

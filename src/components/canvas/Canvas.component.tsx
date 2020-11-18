@@ -66,8 +66,6 @@ const Canvas = ({
   }
 
   const startStroke = point => {
-    console.log('Canvas - startStroke')
-
     sketch = true
     lastDot = point
   }
@@ -82,8 +80,6 @@ const Canvas = ({
   }
 
   const mouseMove = e => {
-    console.log('Canvas - mouseMove')
-
     if (!sketch) {
       return
     }
@@ -91,8 +87,6 @@ const Canvas = ({
   }
 
   const mouseDown = e => {
-    console.log('Canvas - mouseDown')
-
     if (sketch) {
       return
     }
@@ -106,15 +100,11 @@ const Canvas = ({
   }
 
   const mouseEnter = e => {
-    console.log('Canvas - mouseEnter')
-
     if (!mouseButtonIsDown(e.buttons) || sketch) return
     mouseDown(e)
   }
 
   const endStroke = e => {
-    console.log('Canvas - endStroke')
-
     if (!sketch) {
       return
     }
@@ -122,7 +112,6 @@ const Canvas = ({
     e.currentTarget.removeEventListener('mousemove', mouseMove, false)
 
     if (!isDrawingStarted) {
-      console.log('Canvas startStroke drawing started')
       setIsDrawingStarted(true)
       setDrawingStartTime(new Date().getTime())
     }
@@ -133,15 +122,11 @@ const Canvas = ({
       return
     }
 
-    console.log('Canvas - touchStart:', touchStart)
-
     e.preventDefault()
     startStroke(getTouchPoint(e))
   }
 
   const touchMove = e => {
-    console.log('Canvas - touchMove')
-
     if (!sketch) {
       return
     }
@@ -149,8 +134,6 @@ const Canvas = ({
   }
 
   const touchEnd = e => {
-    console.log('Canvas - touchEnd')
-
     sketch = false
   }
 

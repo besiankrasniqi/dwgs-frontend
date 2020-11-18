@@ -36,13 +36,10 @@ const Login = props => {
         password,
       })
       .then(response => {
-        console.log(response)
-
         if (200 === response.status) {
           const {
             data: {payload},
           } = response
-          console.log('pyaload is:', payload)
           AuthenticationUtils.setAuth(
             payload.authorized,
             payload.jwt,
@@ -53,13 +50,11 @@ const Login = props => {
           setValidationMessage(null)
           history.push(RoutesConfig.drawingList.route)
         } else {
-          console.log('response status is:', response.data.payload.status)
           AuthenticationUtils.setAuth(null)
           setValidationMessage(response.data.payload.message)
         }
       })
       .catch(errorResponse => {
-        console.log('errorResponse is:', errorResponse.message)
         AuthenticationUtils.setAuth(null)
         setValidationMessage(
           'Email or password is incorrect, please try again!',

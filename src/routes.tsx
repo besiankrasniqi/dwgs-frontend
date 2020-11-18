@@ -12,12 +12,6 @@ const Routes = (props): React.ReactElement => {
   const [isAuthorized, setIsAuthorized] = React.useState<boolean>(false)
 
   React.useEffect(() => {
-    console.log('current auth:', AuthenticationUtils)
-    console.log(
-      'current AuthenticationUtils object:',
-      AuthenticationUtils.getAuth(),
-    )
-
     if (AuthenticationUtils.getAuth()) {
       setIsAuthorized(AuthenticationUtils.getAuth().isAuthorized)
     } else {
@@ -25,9 +19,7 @@ const Routes = (props): React.ReactElement => {
     }
   }, [AuthenticationUtils.getAuth()])
 
-  React.useEffect(() => {
-    console.log('Routes isAuthorized is:', isAuthorized)
-  }, [isAuthorized])
+  React.useEffect(() => {}, [isAuthorized])
 
   return (
     <>
