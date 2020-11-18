@@ -1,5 +1,5 @@
 import * as React from 'react'
-import AuthUtils from './utils/AuthUtils'
+import AuthenticationUtils from './utils/AuthenticationUtils'
 import {Route} from 'react-router-dom'
 // import Context from '../context'
 import Login from './components/login/login.component'
@@ -12,15 +12,18 @@ const Routes = (props): React.ReactElement => {
   const [isAuthorized, setIsAuthorized] = React.useState<boolean>(false)
 
   React.useEffect(() => {
-    console.log('current auth:', AuthUtils)
-    console.log('current AuthUtils object:', AuthUtils.getAuth())
+    console.log('current auth:', AuthenticationUtils)
+    console.log(
+      'current AuthenticationUtils object:',
+      AuthenticationUtils.getAuth(),
+    )
 
-    if (AuthUtils.getAuth()) {
-      setIsAuthorized(AuthUtils.getAuth().isAuthorized)
+    if (AuthenticationUtils.getAuth()) {
+      setIsAuthorized(AuthenticationUtils.getAuth().isAuthorized)
     } else {
       setIsAuthorized(false)
     }
-  }, [AuthUtils.getAuth()])
+  }, [AuthenticationUtils.getAuth()])
 
   React.useEffect(() => {
     console.log('Routes isAuthorized is:', isAuthorized)
@@ -36,6 +39,7 @@ const Routes = (props): React.ReactElement => {
       />
 
       <Route exact path="/login" not state="login" component={Login} />
+
       <Route exact path="/register" not state="register" component={Register} />
 
       <Route

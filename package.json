@@ -102,6 +102,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.0.1",
     "react-select": "^2.4.4",
+    "react-tooltip": "^4.2.10",
     "source-map-explorer": "^2.4.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"

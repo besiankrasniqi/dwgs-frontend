@@ -3,7 +3,7 @@ import * as React from 'react'
 import NavBar from '../navbar/navbar.component'
 import {useHistory} from 'react-router-dom'
 import useHttp from '../../hooks/useHttp'
-import AuthUtils from '../../utils/AuthUtils'
+import AuthenticationUtils from '../../utils/AuthenticationUtils'
 import ModalInfo from '../ModalInfo'
 
 const SingleImage = ({match}): React.ReactElement => {
@@ -148,10 +148,10 @@ const SingleImage = ({match}): React.ReactElement => {
         'SingleImage -userId is:',
         userId,
         ' - local storage userid is:',
-        AuthUtils.getAuth().userId,
+        AuthenticationUtils.getAuth().userId,
       )
 
-      setShowDeleteButton(userId === AuthUtils.getAuth().userId)
+      setShowDeleteButton(userId === AuthenticationUtils.getAuth().userId)
 
       if (id) {
         loadImageDataUrl(base64Data)

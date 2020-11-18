@@ -1,6 +1,6 @@
-//import React, { useEffect, useState, useRef } from 'react'
 import * as React from 'react'
 import {Link} from 'react-router-dom'
+import useCommonUtils from '../../hooks/useCommonUtils'
 import './sass/thumbnail.style.sass'
 
 interface Props {
@@ -20,6 +20,7 @@ const Thumbnail = ({
   creationDate,
   base64Data,
 }: Props): React.ReactElement => {
+  const CommonUtils = useCommonUtils()
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
   let canvas, contextCanvas
 
@@ -73,7 +74,8 @@ const Thumbnail = ({
             </div>
 
             <div className="thumbnail-item">
-              <strong>Time:</strong> {creationTime}
+              <strong>Time:</strong>{' '}
+              {CommonUtils.secondsToHMSformat(+creationTime)}
             </div>
 
             <div className="thumbnail-item">

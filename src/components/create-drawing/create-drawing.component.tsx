@@ -1,11 +1,13 @@
 import * as React from 'react'
 import './sass/create-drawing.style.sass'
 import {useHistory} from 'react-router-dom'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Canvas from '../canvas/Canvas.component'
 import NavBar from '../navbar/navbar.component'
 import useHttp from '../../hooks/useHttp'
 import ModalInfo from '../ModalInfo'
-import AuthUtils from '../../utils/AuthUtils'
+import AuthenticationUtils from '../../utils/AuthenticationUtils'
+import useCommonUtils from '../../hooks/useCommonUtils'
 
 const CreateDrawing = props => {
   const BASE_URL = 'http://localhost:5001'
@@ -23,9 +25,8 @@ const CreateDrawing = props => {
   const BRUSH_SIZE_EXTRA_SMALL = 15
   const BRUSH_TYPE_ROUND = 'round'
   const BRUSH_TYPE_SQUARE = 'square'
-
   const history = useHistory()
-
+  const CommonUtils = useCommonUtils()
   const [saveModal, setSaveModal] = React.useState({
     show: false,
     title: 'Success!',
@@ -34,8 +35,10 @@ const CreateDrawing = props => {
     bodyInfoClass: '',
   })
 
+  const [drawingName, setDrawingName] = React.useState<string>('')
   const [isBackendError, setIsBackendError] = React.useState<boolean>(false)
   const [canvasInfo, setCanvasInfo] = React.useState(null)
+  const [drawingStartTime, setDrawingStartTime] = React.useState(null)
   const [brushColor, setBrushColor] = React.useState<string>(
     () => BRUSH_COLOR_RED,
   )
@@ -67,6 +70,8 @@ const CreateDrawing = props => {
     square: BRUSH_TYPE_SQUARE,
   }
 
+  const [eraseMode, setEraseMode] = React.useState<boolean>(false)
+
   const onHideSaveModal = () => {
     return
   }
@@ -82,7 +87,30 @@ const CreateDrawing = props => {
     if (!isBackendError) history.push('/drawing-list')
   }
 
-  const saveDrawing = async () => {
+  const drawingNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target
+    setDrawingName(target.value)
+  }
+
+  const saveDrawing = async (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log('saveDrawing was invoked')
+    const drawingEndTime = new Date().getTime()
+    const timeDifferenceInSeconds = CommonUtils.calculateTimeDifferenceInSeconds(
+      drawingStartTime,
+      drawingEndTime,
+    )
+
+    console.log(
+      'saveDrawing - startTime:',
+      drawingStartTime,
+      ' - endTime:',
+      drawingEndTime,
+    )
+    console.log(
+      'saveDrawing - timeDifferenceInSeconds is:',
+      timeDifferenceInSeconds,
+    )
     const imageData = canvasInfo.toDataURL('image/png', 1.0)
     console.log('imageData:', imageData)
 
@@ -93,10 +121,10 @@ const CreateDrawing = props => {
         method: 'post',
         url: `${BASE_URL}/images/save`,
         data: {
-          drawingName: 'image1',
+          drawingName,
           imageData,
-          userId: AuthUtils.getAuth().userId,
-          creationTime: 5000,
+          userId: AuthenticationUtils.getAuth().userId,
+          creationTime: timeDifferenceInSeconds,
         },
       })
 
@@ -135,16 +163,29 @@ const CreateDrawing = props => {
               <div className="card">
                 <div className="card-header drawing-section-header text-light">
                   <div className="row">
-                    <div className="col-md-10">
+                    <div className="col-md-8">
                       <h1 className="drawing-title text-dark">Drawing</h1>
                     </div>
-                    <div className="col-md-2">
-                      <div
-                        className="btn btn-warning float-right"
-                        onClick={saveDrawing}
-                      >
-                        <strong>Save</strong>
-                      </div>
+
+                    <div className="col-md-4">
+                      <form onSubmit={saveDrawing}>
+                        <div className="form-group form-inline float-right mb-0">
+                          <input
+                            type="text"
+                            className="form-control float-right"
+                            placeholder="Enter drawing name"
+                            value={drawingName}
+                            onChange={drawingNameHandler}
+                            required={true}
+                          />
+
+                          <input
+                            type="submit"
+                            value="Save"
+                            className="btn btn-warning float-right ml-2"
+                          />
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -158,9 +199,11 @@ const CreateDrawing = props => {
                             brushStrokeSize={brushStrokeSize}
                             brushType={brushType}
                             canvasInfoCallback={setCanvasInfo}
+                            drawingStartTimeCallback={setDrawingStartTime}
+                            eraseMode={eraseMode}
                           />
                         )
-                      }, [brushColor, brushStrokeSize, brushType])}
+                      }, [brushColor, brushStrokeSize, brushType, eraseMode])}
                     </div>
                   </div>
                   <div className="row mt-5 p-0 m-0 bg-light">
@@ -174,11 +217,14 @@ const CreateDrawing = props => {
                           style={{
                             backgroundColor: brushColors[item],
                           }}
-                          onClick={() => setBrushColor(brushColors[item])}
+                          onClick={() => {
+                            setBrushColor(brushColors[item])
+                            setEraseMode(false)
+                          }}
                         ></div>
                       ))}
                     </div>
-                    <div className="col-md-4 p-3 drawing-section">
+                    <div className="col-md-3 p-3 drawing-section">
                       <div className="drawing-title mb-2 w-100">
                         Brush Sizes:
                       </div>
@@ -192,11 +238,14 @@ const CreateDrawing = props => {
                             height: brushSizes[item],
                             marginTop: (index + 2) * 2 + 'px',
                           }}
-                          onClick={() => setBrushStrokeSize(brushSizes[item])}
+                          onClick={() => {
+                            setBrushStrokeSize(brushSizes[item])
+                            setEraseMode(false)
+                          }}
                         ></div>
                       ))}
                     </div>
-                    <div className="col-md-4 p-3 drawing-section">
+                    <div className="col-md-3 p-3 drawing-section">
                       <div className="drawing-title mb-2 w-100">
                         Brush Types:
                       </div>
@@ -209,9 +258,26 @@ const CreateDrawing = props => {
                               ? 'rounded-circle'
                               : ''
                           }`}
-                          onClick={() => setBrushType(brushTypes[item])}
+                          onClick={() => {
+                            setBrushType(brushTypes[item])
+                            setEraseMode(false)
+                          }}
                         ></div>
                       ))}
+                    </div>
+
+                    <div className="col-md-2 p-3 drawing-section">
+                      <div className="drawing-title mb-2 w-100">Erase:</div>
+                      <div
+                        className="eraser-wraper"
+                        onClick={() => setEraseMode(true)}
+                      >
+                        <FontAwesomeIcon
+                          className="brush-eraser"
+                          icon={['fas', 'eraser']}
+                          size="sm"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -219,7 +285,6 @@ const CreateDrawing = props => {
             </div>
           </div>
         </div>
-
         <ModalInfo
           show={saveModal.show}
           onHide={onHideSaveModal}

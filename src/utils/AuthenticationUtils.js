@@ -1,4 +1,4 @@
-const AuthUtils = {
+const AuthenticationUtils = {
   getAuth() {
     return JSON.parse(localStorage.getItem('auth'))
   },
@@ -20,4 +20,4 @@ const AuthUtils = {
   },
 }
 
-export default AuthUtils
+export default AuthenticationUtils

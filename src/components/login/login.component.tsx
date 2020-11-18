@@ -1,5 +1,5 @@
 import * as React from 'react'
-import AuthUtils from '../../utils/AuthUtils.js'
+import AuthenticationUtils from '../../utils/AuthenticationUtils'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -42,7 +42,7 @@ const Login = props => {
             data: {payload},
           } = response
           console.log('pyaload is:', payload)
-          AuthUtils.setAuth(
+          AuthenticationUtils.setAuth(
             payload.authorized,
             payload.jwt,
             payload.userEmail,
@@ -50,16 +50,16 @@ const Login = props => {
             payload.userName,
           )
           setValidationMessage(null)
-          history.push('/create-drawing')
+          history.push('/drawing-list')
         } else {
           console.log('response status is:', response.data.payload.status)
-          AuthUtils.setAuth(null)
+          AuthenticationUtils.setAuth(null)
           setValidationMessage(response.data.payload.message)
         }
       })
       .catch(errorResponse => {
         console.log('errorResponse is:', errorResponse.message)
-        AuthUtils.setAuth(null)
+        AuthenticationUtils.setAuth(null)
         setValidationMessage(
           'Email or password is incorrect, please try again!',
         )

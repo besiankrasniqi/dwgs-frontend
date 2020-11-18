@@ -1,5 +1,5 @@
 import axios from 'axios'
-import AuthUtils from '../utils/AuthUtils'
+import AuthenticationUtils from '../utils/AuthenticationUtils'
 const allowedEndpoints = ['localhost']
 
 const useHttp = (lib: string): Function => {
@@ -22,7 +22,7 @@ const useHttp = (lib: string): Function => {
 
           if (allowedUrl) {
             config.headers['Authorization'] =
-              'Bearer ' + AuthUtils.getAuth().jwt
+              'Bearer ' + AuthenticationUtils.getAuth().jwt
             // config.headers['Authorization'] = 'Bearer asdgadsggags'
           }
 
