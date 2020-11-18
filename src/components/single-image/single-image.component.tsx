@@ -196,10 +196,19 @@ const SingleImage = ({match}): React.ReactElement => {
               <div className="card">
                 <div className="card-header drawing-section-header text-light">
                   <div className="row">
-                    <div className="col-md-10">
-                      <h1 className="drawing-title text-dark">{drawingName}</h1>
+                    <div className="col-md-12">
+                      <h1 className="drawing-title-single text-dark">
+                        {drawingName}
+                      </h1>
+
+                      <div
+                        className="btn btn-warning float-right"
+                        onClick={goToAllDrawings}
+                      >
+                        <strong>All Drawings</strong>
+                      </div>
                     </div>
-                    <div className="col-md-2">
+                    {/* <div className="col-md-2">
                       {!isPubliclyAccessed ? (
                         <div
                           className="btn btn-warning float-right"
@@ -208,7 +217,7 @@ const SingleImage = ({match}): React.ReactElement => {
                           <strong>All Drawings</strong>
                         </div>
                       ) : null}
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

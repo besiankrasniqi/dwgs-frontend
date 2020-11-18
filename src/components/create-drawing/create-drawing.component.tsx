@@ -164,16 +164,19 @@ const CreateDrawing = props => {
               <div className="card">
                 <div className="card-header drawing-section-header text-light">
                   <div className="row">
-                    <div className="col-md-8">
-                      <h1 className="drawing-title text-dark">Drawing</h1>
-                    </div>
+                    <div className="col-md-12">
+                      <h1 className="drawing-title-create text-dark">
+                        Drawing
+                      </h1>
 
-                    <div className="col-md-4">
-                      <form onSubmit={saveDrawing}>
-                        <div className="form-group form-inline float-right mb-0">
+                      <form
+                        onSubmit={saveDrawing}
+                        className="float-right create-drawing-save-section"
+                      >
+                        <div className="form-group form-inline form-wrapper-save-section mb-0">
                           <input
                             type="text"
-                            className="form-control float-right"
+                            className="form-control float-right drawing-name-input"
                             placeholder="Enter drawing name"
                             value={drawingName}
                             onChange={drawingNameHandler}
@@ -188,6 +191,10 @@ const CreateDrawing = props => {
                         </div>
                       </form>
                     </div>
+
+                    {/* <div className="col-md-6">
+                      
+                    </div> */}
                   </div>
                 </div>
                 <div className="card-body pt-5">

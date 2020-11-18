@@ -8,7 +8,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js',
     publicPath: '/',
   },

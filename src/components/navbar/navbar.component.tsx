@@ -55,7 +55,7 @@ const NavBar = withRouter(({history}) => {
       <div className="navbar-icon-app">
         <FontAwesomeIcon icon={['fas', 'drafting-compass']} size="sm" />
       </div>
-      <div className="row mb-5 navbar-drawings-horizontal">
+      <div className="row m-0 p-0 mb-5 navbar-drawings-horizontal">
         <div className="col-md-12 p-0">
           <div
             className="user-profile-icon-wrapper"

@@ -21,11 +21,31 @@
     cursor: pointer
     background-color: #000
 
-h1.drawing-title
+h1.drawing-title-single
     font-family: 'Oswald', sans-serif
     font-size: 1.5rem
     font-weight: bold
     color: red
+    width: 60%
+    float: left
+
+h1.drawing-title-create
+    font-family: 'Oswald', sans-serif
+    font-size: 1.5rem
+    font-weight: bold
+    color: red
+    width: 40%
+    float: left
+
+.create-drawing-save-section
+    width: 50%
+    margin-top: 0
+
+.form-wrapper-save-section
+    float: right
+
+.drawing-name-input
+    width: 75% !important
 
 .drawing-section-header
     background-color: #919ea9
@@ -53,6 +73,21 @@ h1.drawing-title
         border-left: 1px solid #e4d7d7
         border-bottom: 1px solid #e4d7d7
 
+    .content
+        width: 80% !important
+        margin-left: 5rem
+
+    .canvas-drawing
+        width: 60%
+
+    .create-drawing-save-section
+        width: 100%
+        margin-top: 1rem
+        float: left !important
+
+    .form-wrapper-save-section
+        float: left
+
 /* portrait tablets, portrait iPad, e-readers (Nokia/Kindle), landscape 800x480 hones (Android) */
 @media (min-width: 600px)
     .drawing-section
@@ -60,6 +95,20 @@ h1.drawing-title
         border-right: 1px solid #e4d7d7
         border-left: 1px solid #e4d7d7d7
         border-bottom: 1px solid #e4d7d7
+
+    .content
+        width: 80% !important
+        margin-left: 6rem
+
+    .canvas-drawing
+        width: 60%
+
+    .create-drawing-save-section
+        margin-top: 1rem
+        width: 100%
+
+    .form-wrapper-save-section
+        float: left
 
 /* tablet, landscape iPad, lo-res laptios and desktops */
 @media (min-width: 801px)
@@ -69,6 +118,20 @@ h1.drawing-title
         border-left: 1px solid #e4d7d7
         border-bottom: 1px solid #e4d7d7
 
+    .content
+        width: 80% !important
+        margin-left: 6rem
+
+    .canvas-drawing
+        width: 60%
+
+    .create-drawing-save-section
+        margin-top: 1rem
+        width: 100%
+
+    .form-wrapper-save-section
+        float: left
+
 /* desktops */
 @media (min-width: 1025px)
     .drawing-section
@@ -77,6 +140,20 @@ h1.drawing-title
         border-bottom: 1px solid #e4d7d7
         border-left: 0
 
+    .content
+        width: 80% !important
+        margin-left: 8rem
+
+    .canvas-drawing
+        width: 60%
+
+    .create-drawing-save-section
+        margin-top: 0
+        width: 100%
+
+    .form-wrapper-save-section
+        float: right
+
 /* large desktops */
 @media (min-width: 1281px)
     .drawing-section
@@ -84,3 +161,10 @@ h1.drawing-title
         border-right: 1px solid #e4d7d7
         border-bottom: 1px solid #e4d7d7
         border-left: 0
+
+    .create-drawing-save-section
+        margin-top: 0
+        width: 50%
+
+    .form-wrapper-save-section
+        float: right

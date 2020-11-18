@@ -38,16 +38,16 @@ const DrawingList = (props): React.ReactElement => {
   return (
     <>
       <NavBar />
-      <div className="section-dashboard mx-auto">
-        <div className="content drawing-list-content">
+      <div className="section-dashboard mx-auto section-drawings-list ">
+        <div className="drawing-list-content">
           {drawingList.length ? (
             drawingList.map(item => {
               return (
                 <Thumbnail
-                  key={`${item.id}_${item.drawing_name}`}
-                  id={item.id + ''}
+                  key={`${item.drawing_id}_${item.drawing_name}`}
+                  id={item.drawing_id + ''}
                   drawingName={item.drawing_name}
-                  userName={item.name}
+                  userName={item.user_name}
                   creationTime={item.creation_time_length_seconds}
                   creationDate={item.created_at}
                   base64Data={item.drawing_base64_data}

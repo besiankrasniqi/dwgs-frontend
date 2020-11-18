@@ -120,7 +120,7 @@ const Register = props => {
   return (
     <>
       <div className="auth-ui bg-light p-5">
-        <div className="content">
+        <div>
           <div className="row">
             <div className="col-md-12">
               <h1 className="header-title text-center">Register</h1>

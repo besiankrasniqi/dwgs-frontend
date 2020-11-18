@@ -70,7 +70,7 @@ const Login = props => {
   return (
     <>
       <div className="auth-ui login-ui p-5">
-        <div className="content">
+        <div>
           <div className="row">
             <div className="col-md-12">
               <h1 className="header-title text-center">User Login</h1>
