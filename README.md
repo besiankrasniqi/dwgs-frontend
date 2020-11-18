@@ -22,10 +22,18 @@ Config files are located at:
 * `src/config/config.js`
 * `src/config/routes-config.js`
 
+#### Important Notes
+- please note that a single drawing can be viewed publicly (without requiring user authentication), for example: `<localhost>/image/1` this is done to allow users to share the link to the drawing
+
+#### Architecture
+
+#### Technical Choices
+
+
 
 #### TODO
 - work on responsive layout issues
 - **_useHttp_** is a custom hook that intercepts 'axios' add **Context** to the entire React app and when http response errors are intercepted handle these errors globally 
 - NavBar component currently is loaded inside each component which is redundant, we need to load that on all components (if user authorization is valid,  not on public facing components such as SingleImage component when it is accessed publicly)
 - write tests us React Testing Library
-- use a wrapper for console.log() so that if a setting is switch to on/off at `src/config/config.js` all logs to the console would be enable or disabled
+- use a wrapper for console.log() so that if a setting is switched to on/off at `src/config/config.js` all logs to the console would be enabled or disabled

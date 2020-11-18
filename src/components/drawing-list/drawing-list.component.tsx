@@ -47,7 +47,7 @@ const DrawingList = (props): React.ReactElement => {
                   key={`${item.id}_${item.drawing_name}`}
                   id={item.id + ''}
                   drawingName={item.drawing_name}
-                  userName={'Test Name'}
+                  userName={item.name}
                   creationTime={item.creation_time_length_seconds}
                   creationDate={item.created_at}
                   base64Data={item.drawing_base64_data}
