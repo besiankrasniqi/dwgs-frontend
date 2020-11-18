@@ -56,11 +56,12 @@ const Routes = (props): React.ReactElement => {
         component={isAuthorized ? DrawingList : Login}
       />
 
+      <Route exact path="/image/:id" state="image" component={SingleImage} />
       <Route
         exact
-        path="/image/:id"
+        path="/image/:id/:public"
         state="image"
-        component={isAuthorized ? SingleImage : Login}
+        component={SingleImage}
       />
     </>
   )

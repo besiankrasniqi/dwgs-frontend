@@ -8,6 +8,7 @@ import ModalInfo from '../ModalInfo'
 
 const SingleImage = ({match}): React.ReactElement => {
   const BASE_URL = 'http://localhost:5001'
+  const [isPubliclyAccessed, setIsPubliclyAccessed] = React.useState(false)
   const history = useHistory()
   const httpRequest = useHttp('axios')
   const canvasRef = React.useRef<HTMLCanvasElement>(null)
@@ -121,7 +122,9 @@ const SingleImage = ({match}): React.ReactElement => {
 
     httpRequest({
       method: 'get',
-      url: `${BASE_URL}/images/get-image`,
+      url: !isPubliclyAccessed
+        ? `${BASE_URL}/images/get-image`
+        : `${BASE_URL}/images/get-public-image`,
       params: {
         id: imageId,
       },
@@ -167,11 +170,24 @@ const SingleImage = ({match}): React.ReactElement => {
         setInfoModal(infoModalCopy)
       }
     })
-  }, [canvas, contextCanvas])
+  }, [canvas, contextCanvas, isPubliclyAccessed])
+
+  React.useEffect(() => {
+    setIsPubliclyAccessed(true)
+    if (AuthenticationUtils.getAuth()) {
+      if (AuthenticationUtils.getAuth().isAuthorized) {
+        setIsPubliclyAccessed(false)
+      } else {
+        const urlParams = match.params
+
+        console.log('Single Image url params are:', urlParams)
+      }
+    }
+  }, [])
 
   return (
     <>
-      <NavBar />
+      {!isPubliclyAccessed ? <NavBar /> : null}
       <div className="section-dashboard mx-auto">
         <div className="content">
           <div className="row">
@@ -183,17 +199,18 @@ const SingleImage = ({match}): React.ReactElement => {
                       <h1 className="drawing-title text-dark">{drawingName}</h1>
                     </div>
                     <div className="col-md-2">
-                      <div
-                        className="btn btn-warning float-right"
-                        onClick={goToAllDrawings}
-                      >
-                        <strong>All Drawings</strong>
-                      </div>
+                      {!isPubliclyAccessed ? (
+                        <div
+                          className="btn btn-warning float-right"
+                          onClick={goToAllDrawings}
+                        >
+                          <strong>All Drawings</strong>
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </div>
               </div>
-
               <div className="card-body bg-white pt-5 pb-5">
                 <div className="row">
                   <div className="col-md-12">

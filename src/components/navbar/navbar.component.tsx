@@ -7,10 +7,19 @@ import AuthenticationUtils from '../../utils/AuthenticationUtils'
 import './sass/navbar.style.sass'
 
 const NavBar = withRouter(({history}) => {
+  const [userName, setUserName] = React.useState<string>('')
   const signOut = () => {
     AuthenticationUtils.setAuth(null)
     history.push('/login')
   }
+
+  React.useEffect(() => {
+    if (AuthenticationUtils.getAuth()) {
+      if (AuthenticationUtils.getAuth().userName) {
+        setUserName(AuthenticationUtils.getAuth().userName)
+      }
+    }
+  }, [])
 
   return (
     <>
@@ -38,13 +47,11 @@ const NavBar = withRouter(({history}) => {
         <div className="col-md-12 p-0">
           <div
             className="user-profile-icon-wrapper"
-            data-tip={AuthenticationUtils.getAuth().userName}
+            data-tip={userName}
             data-place="bottom"
             onClick={signOut}
           >
-            <div className="user-profile-icon">
-              {AuthenticationUtils.getAuth().userName[0]}
-            </div>
+            <div className="user-profile-icon">{userName[0]}</div>
           </div>
         </div>
       </div>
