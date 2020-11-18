@@ -1,5 +1,10 @@
 
-# DWGS
+<div align="center">
+<h2>DWGS</h2>
+<img  src="https://github.com/besiankrasniqi/dwgs-frontend/blob/main/images/dwgs-graphic.png?raw=true"/>
+</div>
+
+<hr/>
 
 **DWGS** is a project that enables the creation of drawings using HTML5 Canvas.
 
@@ -40,7 +45,7 @@ Config files are located at:
 * ***FontAwesome*** is used for icons
 
 #### TODO
-- fix responsive layout issues
+- fix small responsive layout issues
 - format the datetime properly at thumbnails on drawing list UI
 - **_useHttp_** is a custom hook that intercepts ***"axios"*** , add **Context** to the entire React app and when http response errors are intercepted, handle these errors globally i.e. show a modal on each error request so that each component does not have to handle errors individually
 - ***NavBar*** component currently is loaded inside each component which is redundant, we need to load that on all components (if user authorization is valid)
